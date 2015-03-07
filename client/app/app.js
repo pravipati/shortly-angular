@@ -24,6 +24,10 @@ angular.module('shortly', [
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController'
     })
+    .when('/:*path', {
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController'
+    })
     .otherwise({
       redirectTo: '/signin'
     });

@@ -4,6 +4,8 @@ angular.module('shortly.links', [])
   // Your code here
   $scope.data = {};
 
+  console.log('in links Controller after a code request');
+
   $scope.getLinks = function(){
     Links.getLinks($scope.data)
     .then(function(links) {
