@@ -2,10 +2,12 @@
   <!-- Your html here -->
   <p>Hello World</p>
   <a href="#/shorten">Click here to shorten some <strong>Links</strong></a>
+  <input type="text" value="Search for a link" ng-model="searchText">
   <hr>
-  <div ng-repeat="link in data">
-    <a href='{{link.url}}'> {{link}}</a>
+  <div ng-repeat="link in data | orderBy:'visits' | filter:searchText">
+    <a href='{{link.url}}'> {{link.url}}</a>
     <a href="{{link.base_url + '/api/links/' + link.code}}"> "{{link.base_url + '/:' + link.code}}"</a>
+    <div> {{ link.visits }} </div>
   </div>
 </div>
 
