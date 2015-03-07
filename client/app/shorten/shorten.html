@@ -1,7 +1,9 @@
 <div ng-controller="ShortenController" id='container'>
 <!-- Your code here -->
+<a href="#/links">Click here to see the already shortened <strong>Links</strong></a>
+<hr>
   <input type='text' ng-model="link"></input>
-  <button ng-click='add()'>submit</button>
+  <button ng-click='validateLink()'>submit</button>
   <div> {{ status }} </div>
 </div>
 

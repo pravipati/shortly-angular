@@ -1,6 +1,8 @@
-angular.module('shortly.shorten', [])
+angular.module('shortly.shorten', [
+])
 
-.controller('ShortenController', function ($scope, $location, Links) {
+.controller('ShortenController', function ($scope, $location, Links, Validate
+ ){
   // Your code here
   $scope.link = '';
   $scope.status;
@@ -9,13 +11,19 @@ angular.module('shortly.shorten', [])
     .then(function(data) {
       console.log('successful add to databse', data);
       $scope.link = '';
-      $scope.status = 'Link successfully shortened and added to database';
     })
     .catch(function(error) {
       console.log('shorten links error', error);
-      $scope.link = '';
-      $scope.status = 'Link failed to be added, check url';
     });
     console.log('created', $scope.link);
+  };
+
+  $scope.validateLink = function() {
+    if( Validate.validateURL($scope.link) ) {
+      $scope.add();
+      $scope.status = 'Link successfully shortened and added to database';
+    } else {
+      $scope.status = 'Link failed to be added, check url';
+    }
   };
 });
