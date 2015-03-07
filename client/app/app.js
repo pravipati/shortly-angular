@@ -16,7 +16,13 @@ angular.module('shortly', [
       controller: 'AuthController'
     })
     // Your code here
-
+    .when('/links', {
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController'
+    })
+    .otherwise({
+      redirectTo: '/signin'
+    });
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');

@@ -14,6 +14,7 @@ angular.module('shortly.auth', [])
       })
       .catch(function (error) {
         console.error(error);
+        $location.path('/signup');
       });
   };
 
