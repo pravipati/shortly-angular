@@ -3,9 +3,9 @@
 // in our signup/signin forms using the injected Auth service
 angular.module('shortly.auth', [])
 
-.controller('AuthController', function ($scope, $window, $location, Auth) {
+.controller('AuthController', function ($scope, $window, $location, Auth, Validate) {
   $scope.user = {};
-
+  $scope.status = "";
   $scope.signin = function () {
     Auth.signin($scope.user)
       .then(function (token) {
@@ -14,7 +14,8 @@ angular.module('shortly.auth', [])
       })
       .catch(function (error) {
         console.error(error);
-        $location.path('/signup');
+        $scope.status = 'Invalid username or password';
+        // $location.path('/signup');
       });
   };
 
@@ -27,5 +28,19 @@ angular.module('shortly.auth', [])
       .catch(function (error) {
         console.error(error);
       });
+  };
+
+  $scope.validateUser = function(form) {
+    var validated = Validate.validateUser($scope.user);
+    if( validated && form === 'signup') {
+      $scope.signup();
+    } else if ( validated && form === 'signin' ) {
+      $scope.signin();
+    } else if ( form === 'signup') {
+      $scope.status = 'Name and password should be greater than 10 characters';
+    } else {
+      $scope.status = 'Invalid username or password';
+    }
+
   };
 });
