@@ -2,12 +2,14 @@ angular.module('shortly.services', [])
 
 .factory('Links', function ($http) {
   // Your code here
-  var getLinks = function() {
+  var getLinks = function(data) {
     return $http({
       method:'GET',
       url: '/api/links',
+      data: data
     }).then(function(resp) {
-      return resp;
+      console.log(resp);
+      return resp.data;
     });
   };
 
@@ -15,10 +17,15 @@ angular.module('shortly.services', [])
     return $http({
       method: 'POST',
       url: '/api/links',
-      data: data
+      data: {url: data}
     }).then(function(resp) {
-      return resp;
+      return resp.data;
     });
+  };
+
+  return {
+    getLinks: getLinks,
+    createLinks: createLinks,
   };
 })
 .factory('Auth', function ($http, $location, $window) {
