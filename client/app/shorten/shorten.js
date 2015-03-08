@@ -1,7 +1,7 @@
 angular.module('shortly.shorten', [
 ])
 
-.controller('ShortenController', function ($scope, $location, Links, Validate
+.controller('ShortenController', function ($scope, $location, Links, Validate, Auth
  ){
   // Your code here
   $scope.link = '';
@@ -26,4 +26,9 @@ angular.module('shortly.shorten', [
       $scope.status = 'Link failed to be added, check url';
     }
   };
+
+  $scope.signOut = function(){
+    Auth.signout();
+  };
+
 });
